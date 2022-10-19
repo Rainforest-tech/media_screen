@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Default_screen from "../views/Default_screen.vue";
+import Default_screen from "../views/DefaultScreen.vue";
+import PickScreen from "../views/PickScreen";
 
 Vue.use(VueRouter);
 
@@ -8,6 +9,11 @@ const routes = [
   {
     path: "/",
     name: "home",
+    component: PickScreen,
+  },
+  {
+    path: "/default-screen",
+    name: "default_screen",
     component: Default_screen,
   },
 ];

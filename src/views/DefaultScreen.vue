@@ -42,11 +42,21 @@
       <b-col class="col-10"
         ><footer class="footer">
           <div class="">
-            <h3 class="text-start mt-4">{{ line[0].title }}</h3>
+            <h3 class="text-start mt-4">
+              {{ firstTitle }}
+            </h3>
           </div>
+          <!-- <div class="">
+            <h3 class="text-start mt-4">
+              {{ line[1].title }}
+            </h3>
+          </div> -->
           <div class="marquee">
-            <h5>{{ line[0].line }}</h5>
+            <h5>{{ firstLine }}</h5>
           </div>
+          <!-- <div class="marquee">
+            <h5>{{ line[1].line }}</h5>
+          </div> -->
         </footer></b-col
       >
     </b-row>
@@ -74,14 +84,29 @@ export default {
       holidays,
       events,
       line,
+      firstTitle: line[0].title,
+      secondTitle: line[1].title,
+      firstLine: line[0].line,
+      secondLine: line[1].line,
+      firstVideo: "",
+      secondVideo: "",
     };
   },
   created() {
     setInterval(this.getNow, 1000);
   },
-  mounted() {
-    console.log(parse("10/15/2022", "MM/dd/yyyy", new Date()));
-    console.log(this.getCurrentEvent);
+  mounted() {},
+  watch: {},
+  beforeUpdate() {
+    this.$nextTick(() =>
+      setInterval(
+        () => (
+          (this.firstTitle = this.secondTitle),
+          (this.firstLine = this.secondLine)
+        ),
+        60000
+      )
+    );
   },
   computed: {
     getCurrentHoliday() {
@@ -139,6 +164,7 @@ export default {
       this.currentTimestamp = time;
       this.currentDate = date;
     },
+    changeTitle() {},
   },
 };
 </script>
@@ -175,10 +201,9 @@ export default {
   -webkit-transform: translateX(100%);
   transform: translateX(100%);
 
-  -moz-animation: marquee 40s linear infinite scroll-left;
+  -moz-animation: marquee 40s linear infinite;
   -webkit-animation: marquee 40s linear infinite;
   animation: marquee 40s linear infinite;
-  animation-delay: 3s;
 }
 
 @-moz-keyframes marquee {
