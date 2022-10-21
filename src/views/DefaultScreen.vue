@@ -24,8 +24,20 @@
       </b-col>
       <b-col class="bg-dark col-10 px-0">
         <video
+          v-if="videoId === 'firstVideo'"
           class="d-flex center"
           src="../videos/1.180419_Boxing_20_18.mp4"
+          style="position: relative"
+          width="100%"
+          height="800"
+          autoplay
+          loop
+          muted
+        ></video>
+        <video
+          v-else
+          class="d-flex center"
+          src="../videos/2.SampleVideo_1280x720_2mb.mp4"
           style="position: relative"
           width="100%"
           height="800"
@@ -90,6 +102,7 @@ export default {
       secondLine: line[1].line,
       firstVideo: "",
       secondVideo: "",
+      videoId: "firstVideo",
     };
   },
   created() {
@@ -107,6 +120,7 @@ export default {
         60000
       )
     );
+    this.$nextTick(() => setInterval(() => (this.videoId = ""), 5000));
   },
   computed: {
     getCurrentHoliday() {
