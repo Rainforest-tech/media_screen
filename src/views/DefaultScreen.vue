@@ -63,9 +63,17 @@
               {{ line[1].title }}
             </h3>
           </div> -->
-          <div class="marquee">
+          <!-- <div class="marquee">
             <h5>{{ firstLine }}</h5>
-          </div>
+          </div> -->
+          <marquee
+            style="height: 80px; font-size: 20px"
+            class="mt-3"
+            behavior="scroll"
+            direction="left"
+            scrollamount="10"
+            >{{ firstLine }}</marquee
+          >
           <!-- <div class="marquee">
             <h5>{{ line[1].line }}</h5>
           </div> -->
@@ -215,9 +223,9 @@ export default {
   -webkit-transform: translateX(100%);
   transform: translateX(100%);
 
-  -moz-animation: marquee 40s linear infinite;
-  -webkit-animation: marquee 40s linear infinite;
-  animation: marquee 40s linear infinite;
+  -moz-animation: marquee 30s linear infinite;
+  -webkit-animation: marquee 30s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 
 @-moz-keyframes marquee {
@@ -247,10 +255,5 @@ export default {
     -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
   }
-}
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 </style>
