@@ -6,13 +6,21 @@
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
 }
-
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"),
+    url(./media/font/Montserrat-Regular.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Montserrat-Bold";
+  src: local("Montserrat-Bold"),
+    url(./media/font/Montserrat-Bold.ttf) format("truetype");
+}
 nav {
   padding: 30px;
 
