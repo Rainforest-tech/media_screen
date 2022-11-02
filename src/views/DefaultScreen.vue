@@ -22,8 +22,8 @@
               <b-carousel-slide
                 v-for="(holiday, index) in getCurrentHoliday"
                 :key="index"
-                img-width="350"
-                img-height="250"
+                img-width="100"
+                img-height="60"
                 img-blank
                 class="mt-1"
                 ><h5
@@ -32,10 +32,7 @@
                 >
                   {{ holiday.day }}
                 </h5>
-                <p
-                  class="text-dark text-start me-5 pe-5"
-                  style="font-size: 12px"
-                >
+                <p class="text-dark text-start" style="font-size: 12px">
                   {{ holiday.title }}
                 </p></b-carousel-slide
               >
@@ -63,22 +60,22 @@
       <b-col class="bg-dark col-10 px-0">
         <video
           v-if="videoId === 'firstVideo'"
-          class="d-flex center"
+          class=""
           src="../media/videos/1.180419_Boxing_20_18.mp4"
           style="position: relative"
           width="100%"
-          height="800"
+          height="100%"
           autoplay
           loop
           muted
         ></video>
         <video
           v-else
-          class="d-flex center"
+          class=""
           src="../media/videos/2.SampleVideo_1280x720_2mb.mp4"
           style="position: relative"
           width="100%"
-          height="800"
+          height="100%"
           autoplay
           loop
           muted
@@ -123,6 +120,7 @@ import subDays from "date-fns/subDays";
 import isWithinInterval from "date-fns/isWithinInterval";
 import ru from "date-fns/locale/ru";
 import line from "../data/line";
+import axios from "axios";
 
 export default {
   name: "Default_screen",
@@ -142,12 +140,16 @@ export default {
       firstVideo: "",
       secondVideo: "",
       videoId: "firstVideo",
+      textLine: [],
+      videos: [],
     };
   },
   created() {
     setInterval(this.getNow, 1000);
   },
-  mounted() {},
+  mounted() {
+    this.getVideos();
+  },
   watch: {},
   beforeUpdate() {
     this.$nextTick(() =>
@@ -201,6 +203,17 @@ export default {
   },
 
   methods: {
+    getTextLine() {
+      const url = "http://localhost:8090/content/text-line";
+      axios.get(url).then((response) => (this.textLine = response));
+    },
+    getVideos() {
+      const url = "http://127.0.0.1:8090/content/videos";
+      axios
+        .get(url)
+        .then((response) => (this.videos = response))
+        .catch((error) => console.log(error));
+    },
     getNow: function () {
       const today = new Date();
       const date = today.toLocaleDateString("ru-ru", {
@@ -217,7 +230,6 @@ export default {
       this.currentTimestamp = time;
       this.currentDate = date;
     },
-    changeTitle() {},
   },
 };
 </script>
@@ -238,8 +250,6 @@ export default {
 .footer {
   position: absolute;
 
-  width: 100%;
-
   background-color: white;
 }
 .logo {
@@ -254,5 +264,8 @@ export default {
 .baloon-mini {
   width: 30px;
   height: 65px;
+}
+.carousel-caption {
+  word-wrap: break-word;
 }
 </style>
