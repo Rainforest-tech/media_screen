@@ -21,16 +21,4 @@
   src: local("Montserrat-Bold"),
     url(./media/font/Montserrat-Bold.ttf) format("truetype");
 }
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>

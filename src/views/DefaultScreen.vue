@@ -1,11 +1,11 @@
 <template>
-  <div class="main">
+  <div class="main" style="overflow: hidden">
     <b-row>
       <b-col class="col-2 bg-warning">
-        <h1 class="time-size m-0 p-0 mt-1 clock">{{ currentTimestamp }}</h1>
+        <h1 class="time-size m-0 p-0 mt-4 clock">{{ currentTimestamp }}</h1>
         <p class="date-size m-0 p-0 text-dark">{{ currentDate }}</p>
         <b-row>
-          <b-col class="col-1"
+          <b-col class="col-1 mt-3"
             ><img
               src="../media/img/Ресурс 1.png"
               alt="baloon"
@@ -18,70 +18,106 @@
               class="baloon-mini mt-5 ms-2"
           /></b-col>
           <b-col>
-            <b-carousel :interval="6000" class="mb-5">
+            <b-carousel :interval="6000" class="mb-2">
               <b-carousel-slide
                 v-for="(holiday, index) in getCurrentHoliday"
                 :key="index"
                 img-width="100"
-                img-height="60"
+                img-height="70"
                 img-blank
-                class="mt-1"
+                class=""
                 ><h5
                   class="text-dark me-2"
                   style="font-size: 16px; font-weight: 900"
                 >
                   {{ holiday.day }}
                 </h5>
-                <p class="text-dark text-start" style="font-size: 12px">
+                <p class="text-dark text-start" style="font-size: 14px">
                   {{ holiday.title }}
                 </p></b-carousel-slide
               >
             </b-carousel></b-col
           >
         </b-row>
-
-        <b-carousel :interval="10000">
-          <b-carousel-slide
-            v-for="event in getCurrentEvent"
-            :key="event.event"
-            img-width="800"
-            img-height="350"
-            img-blank
-            class="mb-5"
-            ><h5 class="text-dark" style="font-size: 16px; font-weight: 900">
-              {{ event.day }}
-            </h5>
-            <p class="text-dark text-start" style="font-size: 14px">
-              {{ event.event }}
-            </p></b-carousel-slide
+        <b-row>
+          <b-col class="col-1">
+            <img
+              src="../media/img/leaf-line (3).png"
+              alt=""
+              class=""
+              style="
+                width: 80px;
+                transform: scale(-1, 1);
+                position: relative;
+                left: -55px;
+              "
+            />
+          </b-col>
+          <b-col class="col-1">
+            <img
+              src="../media/img/leaf-line (3).png"
+              alt=""
+              class=""
+              style="width: 80px; position: relative; left: -25px"
+            />
+          </b-col>
+          <b-col class="col-10">
+            <b-carousel :interval="10000">
+              <b-carousel-slide
+                v-for="event in getCurrentEvent"
+                :key="event.event"
+                img-width="800"
+                img-height="520"
+                img-blank
+                class="mb-5"
+                ><h5
+                  class="text-dark"
+                  style="font-size: 16px; font-weight: 900"
+                >
+                  {{ event.day }}
+                </h5>
+                <p class="text-dark text-start" style="font-size: 14px">
+                  {{ event.event }}
+                </p></b-carousel-slide
+              >
+            </b-carousel>
+          </b-col>
+        </b-row>
+        <b-row class="pt-4 pb-4" style="background-color: rgb(255, 213, 0)">
+          <b-col class="col-2 ms-4"><b>28.09</b></b-col>
+          <b-col class="me-5" style="font-weight: 900; font-size: 14px"
+            >Встреча ГД с СМС</b-col
           >
-        </b-carousel>
+        </b-row>
+        <b-row class="mt-3">
+          <b-col class="col-2 ms-4"><b>03.10</b></b-col>
+          <b-col class="me-5" style="font-weight: 900; font-size: 14px"
+            >Спартакиада ТННЦ<br />(Боулинг)</b-col
+          >
+        </b-row>
       </b-col>
-      <b-col class="bg-dark col-10 px-0">
-        <video
-          v-if="videoId === 'firstVideo'"
-          class=""
-          src="../media/videos/1.180419_Boxing_20_18.mp4"
-          style="position: relative"
-          width="100%"
-          height="100%"
-          autoplay
-          loop
-          muted
-        ></video>
-        <video
-          v-else
-          class=""
-          src="../media/videos/2.SampleVideo_1280x720_2mb.mp4"
-          style="position: relative"
-          width="100%"
-          height="100%"
-          autoplay
-          loop
-          muted
-        ></video>
+      <b-col class="bg-dark col-10">
+        <div v-if="videoId === 'firstVideo'" class="video-container">
+          <video
+            class="video"
+            src="../media/videos/1.180419_Boxing_20_18.mp4"
+            autoplay
+            loop
+            muted
+          ></video>
+        </div>
+        <div class="video-container" v-else>
+          <video
+            class="video"
+            src="../media/videos/2.SampleVideo_1280x720_2mb.mp4"
+            autoplay
+            loop
+            muted
+          ></video>
+        </div>
       </b-col>
     </b-row>
+
     <b-row>
       <b-col class="col-2 px-0">
         <img
@@ -120,7 +156,7 @@ import subDays from "date-fns/subDays";
 import isWithinInterval from "date-fns/isWithinInterval";
 import ru from "date-fns/locale/ru";
 import line from "../data/line";
-import axios from "axios";
+// import axios from "axios";
 
 export default {
   name: "Default_screen",
@@ -148,7 +184,7 @@ export default {
     setInterval(this.getNow, 1000);
   },
   mounted() {
-    this.getVideos();
+    // this.getVideos();
   },
   watch: {},
   beforeUpdate() {
@@ -203,17 +239,17 @@ export default {
   },
 
   methods: {
-    getTextLine() {
-      const url = "http://localhost:8090/content/text-line";
-      axios.get(url).then((response) => (this.textLine = response));
-    },
-    getVideos() {
-      const url = "http://127.0.0.1:8090/content/videos";
-      axios
-        .get(url)
-        .then((response) => (this.videos = response))
-        .catch((error) => console.log(error));
-    },
+    // getTextLine() {
+    //   const url = "http://localhost:8090/content/text-line";
+    //   axios.get(url).then((response) => (this.textLine = response));
+    // },
+    // getVideos() {
+    //   const url = "http://127.0.0.1:8090/content/videos";
+    //   axios
+    //     .get(url)
+    //     .then((response) => (this.videos = response))
+    //     .catch((error) => console.log(error));
+    // },
     getNow: function () {
       const today = new Date();
       const date = today.toLocaleDateString("ru-ru", {
@@ -267,5 +303,20 @@ export default {
 }
 .carousel-caption {
   word-wrap: break-word;
+  color: rgb(255, 213, 0);
+}
+.video-container {
+  padding-bottom: 56.25%;
+  padding-top: 20px;
+  height: 0;
+  margin: 0 auto;
+  position: relative;
+}
+.video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
