@@ -244,11 +244,11 @@ export default {
     //   axios.get(url).then((response) => (this.textLine = response));
     // },
     // getVideos() {
-    //   const url = "http://127.0.0.1:8090/content/videos";
+    //   const url = "http://localhost:8090/content/videos";
     //   axios
     //     .get(url)
     //     .then((response) => (this.videos = response))
-    //     .catch((error) => console.log(error));
+    //
     // },
     getNow: function () {
       const today = new Date();
