@@ -2,9 +2,11 @@
   <div class="main" style="overflow: hidden">
     <b-row>
       <b-col class="col-2 bg-warning">
-        <h1 class="time-size m-0 p-0 mt-4 clock">{{ currentTimestamp }}</h1>
+        <h1 class="time-size m-0 p-0 mt-4 clock">
+          {{ currentTimestamp }}
+        </h1>
         <p class="date-size m-0 p-0 text-dark">{{ currentDate }}</p>
-        <b-row>
+        <b-row class="mt-4">
           <b-col class="col-1 mt-3"
             ><img
               src="../media/img/Ресурс 1.png"
@@ -84,13 +86,21 @@
           </b-col>
         </b-row>
         <b-row class="pt-4 pb-4" style="background-color: rgb(255, 213, 0)">
-          <b-col class="col-2 ms-4"><b>28.09</b></b-col>
+          <b-col
+            class="col-2 ms-4"
+            style="font-family: 'Montserrat-Bold', serif"
+            >28.09</b-col
+          >
           <b-col class="me-5" style="font-weight: 900; font-size: 14px"
             >Встреча ГД с СМС</b-col
           >
         </b-row>
         <b-row class="mt-3">
-          <b-col class="col-2 ms-4"><b>03.10</b></b-col>
+          <b-col
+            class="col-2 ms-4"
+            style="font-family: 'Montserrat-Bold', serif"
+            >03.10</b-col
+          >
           <b-col class="me-5" style="font-weight: 900; font-size: 14px"
             >Спартакиада ТННЦ<br />(Боулинг)</b-col
           >
